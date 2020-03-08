@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using IdentityTest2.Models;
+using IdentityTest2.App_Start;
 
 namespace IdentityTest2
 {
