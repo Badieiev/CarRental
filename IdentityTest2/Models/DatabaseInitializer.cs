@@ -1,4 +1,5 @@
 ﻿using IdentityTest2.App_Start;
+using IdentityTest2.Repositories;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -34,6 +35,109 @@ namespace IdentityTest2.Models
                 userManager.AddToRole(admin.Id, adminRole.Name);
                 userManager.AddToRole(admin.Id, managerRole.Name);
             }
+
+            CarBrand[] brands =
+            {
+                new CarBrand { Brand="Toyota" },
+                new CarBrand { Brand="Volvo" },
+                new CarBrand { Brand="KIA" },
+                new CarBrand { Brand="ZaZ" }
+            };
+
+            CarType[] types =
+            {
+                new CarType { Type="Econom" },
+                new CarType { Type="Comfort" },
+                new CarType { Type="Business" }
+            };
+
+            Car [] cars =
+            {
+                new Car {
+                    Name = "Corolla",
+                    Price = 100,
+                    Brand = brands[0],
+                    Type = types[0]
+                },
+                new Car {
+                    Name = "Yaris",
+                    Price = 150,
+                    Brand = brands[0],
+                    Type = types[0]
+                },
+                new Car {
+                    Name = "Camry",
+                    Price = 200,
+                    Brand = brands[0],
+                    Type = types[1]
+                },
+                new Car {
+                    Name = "Land Cruiser",
+                    Price = 300,
+                    Brand = brands[0],
+                    Type = types[2]
+                },
+                new Car {
+                    Name = "RAV 4",
+                    Price = 500,
+                    Brand = brands[0],
+                    Type = types[2]
+                },
+
+                new Car {
+                    Name = "XC90",
+                    Price = 400,
+                    Brand = brands[1],
+                    Type = types[1]
+                },
+                new Car {
+                    Name = "S60",
+                    Price = 350,
+                    Brand = brands[1],
+                    Type = types[2]
+                },
+
+                new Car {
+                    Name = "Ceed",
+                    Price = 350,
+                    Brand = brands[2],
+                    Type = types[1]
+                },
+                new Car {
+                    Name = "Rio",
+                    Price = 450,
+                    Brand = brands[2],
+                    Type = types[1]
+                },
+                new Car {
+                    Name = "Soul",
+                    Price = 550,
+                    Brand = brands[2],
+                    Type = types[2]
+                },
+                new Car {
+                    Name = "Sportage",
+                    Price = 550,
+                    Brand = brands[2],
+                    Type = types[1]
+                },
+
+                new Car {
+                    Name = "Lanos",
+                    Price = 50,
+                    Brand = brands[3],
+                    Type = types[0]
+                },
+            };
+
+            CarRepository carRepository = new CarRepository();
+
+            foreach(var car in cars)
+            {
+                carRepository.Add(car);
+            }
+
+            carRepository.SaveChanges();
 
             base.Seed(context);
         }
