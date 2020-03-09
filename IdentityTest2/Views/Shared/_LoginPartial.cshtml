@@ -9,7 +9,10 @@
         @if (User.IsInRole("admin"))
         {
             <li>
-                @Html.ActionLink("Managers", "ListManagers", "Admin", routeValues: null, htmlAttributes: new { title = "Manage" });
+                @Html.ActionLink("Users", "ListUsers", "Admin", routeValues: null, htmlAttributes: new { title = "Users" });
+            </li>
+            <li>
+                @Html.ActionLink("Managers", "ListManagers", "Admin", routeValues: null, htmlAttributes: new { title = "Managers" });
             </li>
             <li>
                 @Html.ActionLink("Hello Admin " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })

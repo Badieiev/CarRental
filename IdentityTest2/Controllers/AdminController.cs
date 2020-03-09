@@ -149,5 +149,12 @@ namespace IdentityTest2.Controllers
 
             return RedirectToAction("ListManagers", "Admin");
         }
+
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult ListUsers()
+        { 
+            return View(TheUserManager.Users);
+        }
     }
 }

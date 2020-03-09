@@ -1,0 +1,50 @@
+﻿
+@model IEnumerable<IdentityTest2.Models.ApplicationUser>
+@{
+    ViewBag.Title = "List users";
+}
+
+<h2>List of users</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@Html.ActionLink("Edit", "EditUser", new { id = user.Id })</td>
+                
+                <td>Block</td>
+                <td>
+                    @using (Html.BeginForm("DeleteUser", "Admin"))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("id", user.Id)
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-default" />
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function onUserBlockButtonClick(isBlocked)
+    {
+
+    }
+</script>
+
+

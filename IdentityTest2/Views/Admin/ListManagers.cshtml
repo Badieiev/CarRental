@@ -1,7 +1,7 @@
 ﻿
 @model IEnumerable<IdentityTest2.Models.ApplicationUser>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "List managers";
 }
 
 <h2>List of managers</h2>
@@ -22,21 +22,21 @@
             <td>@manager.UserName</td>
             <td>@manager.Email</td>
             <td>@Html.ActionLink("Edit", "EditManager", new { id = manager.Id })</td>
-            <td>
-                @using (Html.BeginForm("DeleteManager", "Admin"))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("id", manager.Id)
-
-                <div class="form-actions no-color">
-                    <input type="submit" value="Delete" class="btn btn-default" />
-                </div>
-                }                
-            </td>
+            <td>@Html.ActionLink("Delete", "DeleteManager", new { id = manager.Id }, new { @class="delete-link", id=manager.Id })</td>
         </tr>
         }
     </tbody>
 </table>
 
 @Html.ActionLink("Create manager", "CreateManager", "Admin")
+
+@section Scripts
+{
+    <script>
+        $(function () {
+            $('.delete-link').click(onDelete('@Url.Action("DeleteManager", "Admin")', '@Url.Action("ListManagers", "Admin")'));
+        });
+    </script>
+}
+
 
