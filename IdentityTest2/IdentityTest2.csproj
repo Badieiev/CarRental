@@ -179,6 +179,10 @@
     <Compile Include="Migrations\202003071932014_Init.Designer.cs">
       <DependentUpon>202003071932014_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003091225230_IsBlocked.cs" />
+    <Compile Include="Migrations\202003091225230_IsBlocked.Designer.cs">
+      <DependentUpon>202003091225230_IsBlocked.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -269,6 +273,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003071932014_Init.resx">
       <DependentUpon>202003071932014_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003091225230_IsBlocked.resx">
+      <DependentUpon>202003091225230_IsBlocked.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

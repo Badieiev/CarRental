@@ -153,8 +153,36 @@ namespace IdentityTest2.Controllers
         [HttpGet]
         [Authorize(Roles = "admin")]
         public ActionResult ListUsers()
-        { 
-            return View(TheUserManager.Users);
+        {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
+            var userRole = roleManager.FindByName("user");
+
+            if (userRole == null)
+                throw new HttpRequestException();
+
+            var managers = TheUserManager.Users
+                .Where(u => u.Roles.Select(r => r.RoleId)
+                .Contains(userRole.Id));
+
+            if (managers == null)
+                throw new HttpRequestException();
+
+            return View(managers);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult BlockUser(string id)
+        {
+            var user = TheUserManager.FindById(id);           
+
+            if (user == null)
+                throw new HttpRequestException();
+
+            user.IsBlocked = !user.IsBlocked;
+            TheUserManager.Update(user);
+
+            return Json(new { IsBlocked = user.IsBlocked });
         }
     }
 }

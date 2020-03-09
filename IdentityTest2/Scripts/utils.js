@@ -16,3 +16,18 @@ function onDelete(actionUrl, redirectUrl) {
     }
 }
 
+function onBlockUser(e) {    
+    e.preventDefault();
+    var id = e.currentTarget.id;
+
+    console.log(e);
+
+    $.post("/Admin/BlockUser", { id: id },
+        function (data) {
+            $(`#${id}`).text(data["IsBlocked"] ? "Unblock" : "Block");
+        })
+    .fail(function () {
+        console.log("failed");
+    });    
+}
+

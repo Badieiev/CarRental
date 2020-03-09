@@ -9,7 +9,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Username</th>
             <th scope="col">E-mail</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
@@ -19,7 +18,6 @@
         @foreach (var manager in Model)
         {
         <tr>
-            <td>@manager.UserName</td>
             <td>@manager.Email</td>
             <td>@Html.ActionLink("Edit", "EditManager", new { id = manager.Id })</td>
             <td>@Html.ActionLink("Delete", "DeleteManager", new { id = manager.Id }, new { @class="delete-link", id=manager.Id })</td>
@@ -28,7 +26,7 @@
     </tbody>
 </table>
 
-@Html.ActionLink("Create manager", "CreateManager", "Admin")
+@Html.ActionLink("Create manager", "CreateManager", "Admin", new { @class= "btn btn-primary" })
 
 @section Scripts
 {

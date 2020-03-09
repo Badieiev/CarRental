@@ -9,9 +9,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Username</th>
             <th scope="col">E-mail</th>
             <th scope="col">Edit</th>
+            <th scope="col">Block</th>
             <th scope="col">Delete</th>
         </tr>
     </thead>
@@ -19,32 +19,25 @@
         @foreach (var user in Model)
         {
             <tr>
-                <td>@user.UserName</td>
                 <td>@user.Email</td>
                 <td>@Html.ActionLink("Edit", "EditUser", new { id = user.Id })</td>
-                
-                <td>Block</td>
-                <td>
-                    @using (Html.BeginForm("DeleteUser", "Admin"))
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.Hidden("id", user.Id)
 
-                        <div class="form-actions no-color">
-                            <input type="submit" value="Delete" class="btn btn-default" />
-                        </div>
-                    }
-                </td>
+                <td>@Html.ActionLink(user.IsBlocked ? "Unblock" : "Block", "BlockUser", new { id = user.Id }, new { @class = "block-link", id = user.Id })</td>
+
+                <td>@Html.ActionLink("Delete", "DeleteUser", new { id = user.Id }, new { @class = "delete-link", id = user.Id })</td>
             </tr>
         }
     </tbody>
 </table>
 
-<script>
-    function onUserBlockButtonClick(isBlocked)
-    {
-
-    }
-</script>
+@section Scripts
+{
+    <script>
+        $(function () {
+            $('.delete-link').click(onDelete('@Url.Action("DeleteUser", "Admin")', '@Url.Action("ListUsers", "Admin")'));
+            $('.block-link').click(onBlockUser);
+        });
+    </script>
+}
 
 
