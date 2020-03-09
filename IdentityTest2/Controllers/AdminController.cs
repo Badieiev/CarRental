@@ -55,7 +55,7 @@ namespace IdentityTest2.Controllers
 
         [HttpGet]
         [Authorize(Roles = "admin")]
-        public ActionResult Index()
+        public ActionResult ListManagers()
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
             var managerRole = roleManager.FindByName("manager");
@@ -99,7 +99,7 @@ namespace IdentityTest2.Controllers
 
             TheUserManager.Update(user);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("ListManagers");
         }
 
         [HttpGet]
@@ -123,7 +123,7 @@ namespace IdentityTest2.Controllers
             {
                 var manager = TheUserManager.FindByEmail(user.Email);
                 TheUserManager.AddToRole(manager.Id, "manager");
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ListManagers", "Admin");
             }
 
             foreach (var error in result.Errors)
@@ -132,6 +132,22 @@ namespace IdentityTest2.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult DeleteManager(string id)
+        {
+            if (!ModelState.IsValid) throw new HttpRequestException();
+
+            var manager = TheUserManager.FindById(id);
+
+            if (manager == null)
+                return RedirectToAction("ListManagers", "Admin");
+
+            TheUserManager.Delete(manager);
+
+            return RedirectToAction("ListManagers", "Admin");
         }
     }
 }

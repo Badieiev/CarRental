@@ -156,6 +156,8 @@ namespace IdentityTest2.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var createdUser = await UserManager.FindByEmailAsync(user.Email);
+                    await UserManager.AddToRoleAsync(createdUser.Id, "user");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
