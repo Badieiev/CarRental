@@ -1,15 +1,14 @@
 ﻿@model IdentityTest2.Models.ApplicationUser
-
 @{
-    ViewBag.Title = "Edit Manager";
+    ViewBag.Title = "Edit User";
 }
 
-<h2>Edit Manager</h2>
+<h2>Edit User</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>ApplicationUser</h4>
         <hr />

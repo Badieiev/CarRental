@@ -184,5 +184,50 @@ namespace IdentityTest2.Controllers
 
             return Json(new { IsBlocked = user.IsBlocked });
         }
+
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult EditUser(string id)
+        {
+            var user = TheUserManager.FindById(id);
+
+            if (user == null)
+                throw new HttpRequestException();
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult EditUser(ApplicationUser user)
+        {
+            if (!ModelState.IsValid) throw new HttpRequestException();
+
+            var existingUser = TheUserManager.FindById(user.Id);
+            if (existingUser == null) throw new HttpRequestException();
+
+            existingUser.Email = user.Email;
+            existingUser.UserName = user.Email;
+
+            TheUserManager.Update(existingUser);
+
+            return RedirectToAction("ListUsers");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult DeleteUser(string id)
+        {
+            if (!ModelState.IsValid) throw new HttpRequestException();
+
+            var user = TheUserManager.FindById(id);
+
+            if (user == null)
+                return RedirectToAction("ListUsers", "Admin");
+
+            TheUserManager.Delete(user);
+
+            return RedirectToAction("ListUsers", "Admin");
+        }
     }
 }
