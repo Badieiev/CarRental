@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -17,5 +18,9 @@ namespace IdentityTest2.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<CarBrand> Brands { get; set; }
+        public DbSet<CarType> CarTypes { get; set; }
+        public DbSet<Car> Cars { get; set; }
     }
 }

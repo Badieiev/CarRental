@@ -183,9 +183,24 @@
     <Compile Include="Migrations\202003091225230_IsBlocked.Designer.cs">
       <DependentUpon>202003091225230_IsBlocked.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003091501332_CarBrand.cs" />
+    <Compile Include="Migrations\202003091501332_CarBrand.Designer.cs">
+      <DependentUpon>202003091501332_CarBrand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003091504144_CarType.cs" />
+    <Compile Include="Migrations\202003091504144_CarType.Designer.cs">
+      <DependentUpon>202003091504144_CarType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003091513015_Car.cs" />
+    <Compile Include="Migrations\202003091513015_Car.Designer.cs">
+      <DependentUpon>202003091513015_Car.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\Car.cs" />
+    <Compile Include="Models\CarBrand.cs" />
+    <Compile Include="Models\CarType.cs" />
     <Compile Include="Models\DatabaseInitializer.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -277,6 +292,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003091225230_IsBlocked.resx">
       <DependentUpon>202003091225230_IsBlocked.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003091501332_CarBrand.resx">
+      <DependentUpon>202003091501332_CarBrand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003091504144_CarType.resx">
+      <DependentUpon>202003091504144_CarType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003091513015_Car.resx">
+      <DependentUpon>202003091513015_Car.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
