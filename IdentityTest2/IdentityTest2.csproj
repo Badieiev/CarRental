@@ -207,7 +207,9 @@
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PageInfo.cs" />
+    <Compile Include="Repositories\CarBrandRepository.cs" />
     <Compile Include="Repositories\CarRepository.cs" />
+    <Compile Include="Repositories\CarTypeRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
