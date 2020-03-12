@@ -1,0 +1,40 @@
+﻿
+@model IEnumerable<CarRental.Models.ApplicationUser>
+@{
+    ViewBag.Title = "List managers";
+}
+
+<h2>List of managers</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">E-mail</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var manager in Model)
+        {
+        <tr>
+            <td>@manager.Email</td>
+            <td>@Html.ActionLink("Edit", "EditManager", new { id = manager.Id })</td>
+            <td>@Html.ActionLink("Delete", "DeleteManager", new { id = manager.Id }, new { @class="delete-link", id=manager.Id })</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@Html.ActionLink("Create manager", "CreateManager", "Admin", new { @class= "btn btn-primary" })
+
+@section Scripts
+{
+    <script>
+        $(function () {
+            $('.delete-link').click(onDelete('@Url.Action("DeleteManager", "Admin")', '@Url.Action("ListManagers", "Admin")'));
+        });
+    </script>
+}
+
+
