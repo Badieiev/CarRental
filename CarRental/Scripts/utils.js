@@ -30,4 +30,3 @@ function onBlockUser(e) {
         console.log("failed");
     });    
 }
-

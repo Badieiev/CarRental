@@ -3,6 +3,7 @@ using CarRental.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 
@@ -35,6 +36,56 @@ namespace CarRental.Controllers
 
             return View(carPageViewModel);
         }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult DeleteCar(Car car)
+        {
+            carRepository.Delete(car.CarId);
+            carRepository.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult DeleteCarForm(int id)
+        {
+            var car = carRepository.Get(id);
+            return View(car);
+        }
+
+
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult EditCar(Car car)
+        {
+            var existingCar = carRepository.Get(car.CarId);
+            if (existingCar == null)
+                throw new HttpRequestException();
+
+            existingCar.Name = car.Name;
+            existingCar.Price = car.Price;
+
+            var brand = carBrandRepository.FindBrandByName(car.Brand.Brand);
+            if (brand == null)
+                existingCar.Brand = new CarBrand { Brand = car.Brand.Brand };
+            else
+                existingCar.Brand.Brand = car.Brand.Brand;
+            
+            carRepository.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult EditCarForm(int id)
+        {
+            var car = carRepository.Get(id);
+            return View(car);
+        }
+
+
 
         public ActionResult About()
         {

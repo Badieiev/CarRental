@@ -11,5 +11,16 @@ namespace CarRental.Repositories
         public CarBrandRepository() : base(new ApplicationDbContext())
         { 
         }
+
+        public CarBrand FindBrandByName(string brand)
+        {
+            var brands = DbSet.Where(b => b.Brand == brand);
+            if (brands.Count() == 0)
+            {
+                return null;
+            }
+
+            return brands.First();
+        }
     }
 }

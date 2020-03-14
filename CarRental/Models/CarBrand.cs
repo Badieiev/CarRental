@@ -10,6 +10,7 @@ namespace CarRental.Models
     {
         [Key]
         public int BrandID { get; set; }
+
         public string Brand { get; set; }
     }
 }

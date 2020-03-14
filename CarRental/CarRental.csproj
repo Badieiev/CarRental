@@ -260,6 +260,8 @@
     <Content Include="Views\Admin\CreateManager.cshtml" />
     <Content Include="Views\Admin\ListUsers.cshtml" />
     <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Home\DeleteCarForm.cshtml" />
+    <Content Include="Views\Home\EditCarForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
