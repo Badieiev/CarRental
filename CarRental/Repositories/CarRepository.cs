@@ -17,13 +17,48 @@ namespace CarRental.Repositories
         {
             return DbSet.Count();
         }
-        public IList<Car> FindCars(int startIndex, int page)
+
+        public int FilteredCarsNumber(string brand, string type)
         {
-            return DbSet
-                .OrderBy(car => car.Name)
-                .Skip(startIndex)
-                .Take(page)
-                .ToList();
+            IQueryable<Car> cars = DbSet;
+
+            if (brand != "All")
+            {
+                cars = cars.Where(car => car.Brand.Brand == brand);
+            }
+
+            if (type != "All")
+            {
+                cars = cars.Where(car => car.Type.Type == type);
+            }
+
+            return cars.Count();
+        }
+
+        public IList<Car> FindCars(int startIndex, int page, string brand, string type, string sortType)
+        {
+            IQueryable<Car> cars = DbSet;
+            
+            if (brand != "All")
+            {
+                cars = cars.Where(car => car.Brand.Brand == brand);
+            }
+
+            if (type != "All")
+            {
+                cars = cars.Where(car => car.Type.Type == type);
+            }
+
+            if (sortType == "Price")
+            {
+                cars = cars.OrderBy(car => car.Price);
+            }
+            else 
+            {
+                cars = cars.OrderBy(car => car.Name);
+            }
+
+            return cars.Skip(startIndex).Take(page).ToList();
         }
 
         public IList<Car> FindCarsByBrand(string brand, int startIndex, int page)

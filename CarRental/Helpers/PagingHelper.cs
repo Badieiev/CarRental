@@ -16,6 +16,7 @@ namespace CarRental.Helpers
             for (int i = 1; i <= pageInfo.TotalPages; i++)
             {
                 TagBuilder tag = new TagBuilder("a");
+                tag.MergeAttribute("page", i.ToString());
                 tag.MergeAttribute("href", pageUrl(i));
                 tag.InnerHtml = i.ToString();
 

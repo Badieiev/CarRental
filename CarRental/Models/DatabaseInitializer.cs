@@ -54,6 +54,18 @@ namespace CarRental.Models
             Car [] cars =
             {
                 new Car {
+                    Name = "Highlander",
+                    Price = 600,
+                    Brand = brands[0],
+                    Type = types[2]
+                },
+                new Car {
+                    Name = "C-HR",
+                    Price = 650,
+                    Brand = brands[0],
+                    Type = types[2]
+                },
+                new Car {
                     Name = "Corolla",
                     Price = 100,
                     Brand = brands[0],

@@ -15,21 +15,23 @@ namespace CarRental.Controllers
         private CarTypeRepository carTypeRepository = new CarTypeRepository();
 
         [AllowAnonymous]
-        public ActionResult Index(int page=1)
+        public ActionResult Index(int page = 1, string Brand = "All", string Type = "All", string SortType = "Price")
         {
             int pageSize = 5;
-            var cars = carRepository.FindCars(pageSize * (page-1), pageSize);
-            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = carRepository.TotalCarsNumber() };
+            var cars = carRepository.FindCars(pageSize * (page-1), pageSize, Brand, Type, SortType);
+            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = carRepository.FilteredCarsNumber(Brand, Type) };
             
             CarPageViewModel carPageViewModel = new CarPageViewModel { Cars = cars, PageInfo = pageInfo };
 
             var brands = carBrandRepository.GetAll().ToList();
             brands.Insert(0, new CarBrand { Brand = "All", BrandID = 0 });            
-            carPageViewModel.Brands = new SelectList(brands.Select(brand => brand.Brand).ToList());
+            carPageViewModel.Brands = new SelectList(brands.Select(brand => brand.Brand).ToList(), Brand);
 
             var carTypes = carTypeRepository.GetAll().ToList();
             carTypes.Insert(0, new CarType { Type = "All", TypeId = 0 });
-            carPageViewModel.CarTypes = new SelectList(carTypes.Select(type => type.Type).ToList());
+            carPageViewModel.CarTypes = new SelectList(carTypes.Select(type => type.Type).ToList(), Type);
+
+            carPageViewModel.SortType = new SelectList(new List<string> { "Price", "Name" }, SortType);
 
             return View(carPageViewModel);
         }
