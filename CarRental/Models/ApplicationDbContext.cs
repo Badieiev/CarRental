@@ -22,5 +22,7 @@ namespace CarRental.Models
         public DbSet<CarBrand> Brands { get; set; }
         public DbSet<CarType> CarTypes { get; set; }
         public DbSet<Car> Cars { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
     }
 }

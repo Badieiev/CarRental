@@ -5,68 +5,76 @@
     ViewBag.Title = "Cars";
 }
 
-<div class="container">
-    <h1>Cars</h1>
-    @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-inline", role = "form" }))
-    {
-        <div class="form-group mb-2">
-            @Html.Label("Brand")
-            @Html.DropDownList("Brand", Model.Brands as SelectList, htmlAttributes: new { @class = "form-control", id = "BrandDropdown" })
-        </div>
-        <div class="form-group mb-2">
-            @Html.Label("Car type")
-            @Html.DropDownList("Type", Model.CarTypes as SelectList, htmlAttributes: new { @class = "form-control", id = "TypeDropdown" })
-        </div>
-        <div class="form-group mb-2">
-            @Html.Label("Sort by")
-            @Html.DropDownList("SortType", Model.SortType as SelectList, htmlAttributes: new { @class = "form-control", id = "SortDropdown" })
-        </div>
-        <input type="submit" value="Filter" class="btn btn-default" />
-    }
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Brand</th>
-                <th scope="col">Type</th>
-                <th scope="col">Price</th>
-                @if (User.IsInRole("admin"))
-                {
-                    <th scope="col">Delete</th>
-                    <th scope="col">Edit</th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var car in Model.Cars)
-            {
+    <div class="container">
+        <h1>Cars</h1>
+        @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+        {
+            <div class="form-group mb-2">
+                @Html.Label("Brand")
+                @Html.DropDownList("Brand", Model.Brands as SelectList, htmlAttributes: new { @class = "form-control", id = "BrandDropdown" })
+            </div>
+            <div class="form-group mb-2">
+                @Html.Label("Car type")
+                @Html.DropDownList("Type", Model.CarTypes as SelectList, htmlAttributes: new { @class = "form-control", id = "TypeDropdown" })
+            </div>
+            <div class="form-group mb-2">
+                @Html.Label("Sort by")
+                @Html.DropDownList("SortType", Model.SortType as SelectList, htmlAttributes: new { @class = "form-control", id = "SortDropdown" })
+            </div>
+            <input type="submit" value="Filter" class="btn btn-default" />
+        }
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@car.Name</td>
-                    <td>@car.Brand.Brand</td>
-                    <td>@car.Type.Type</td>
-                    <td>@car.Price</td>
+                    <th scope="col">Name</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Price</th>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <th scope="col">Order</th>
+                    }
                     @if (User.IsInRole("admin"))
                     {
-                        <td>@Html.ActionLink("Delete", "DeleteCarForm", new { id = car.CarId })</td>
-                        <td>@Html.ActionLink("Edit", "EditCarForm", new { id = car.CarId })</td>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Edit</th>
                     }
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var car in Model.Cars)
+                {
+                    <tr>
+                        <td>@car.Name</td>
+                        <td>@car.Brand.Brand</td>
+                        <td>@car.Type.Type</td>
+                        <td>@car.Price</td>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <td>@Html.ActionLink("Order", "CreateOrder", new { id = car.CarId })</td>
+                        }
+                        @if (User.IsInRole("admin"))
+                        {
+                            <td>@Html.ActionLink("Delete", "DeleteCarForm", new { id = car.CarId })</td>
+                            <td>@Html.ActionLink("Edit", "EditCarForm", new { id = car.CarId })</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-    <div class="btn-group">
-        @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new
+        <div class="btn-group">
+            @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new
+            {
+                page = x,
+                Brand = Model.Brands.SelectedValue,
+                Type = Model.CarTypes.SelectedValue,
+                SortType = Model.SortType.SelectedValue
+            })
+            )
+        </div>
+        @if (User.IsInRole("admin"))
         {
-            page = x,
-            Brand = Model.Brands.SelectedValue,
-            Type = Model.CarTypes.SelectedValue,
-            SortType = Model.SortType.SelectedValue
-        })
-        )
+            @Html.ActionLink("Add new car", "AddNewCar", "Home", new { @class = "btn btn-primary" })
+        }
     </div>
-    @if (User.IsInRole("admin"))
-    {
-        @Html.ActionLink("Add new car", "AddNewCar", "Home", new { @class = "btn btn-primary" })
-    }
-</div>

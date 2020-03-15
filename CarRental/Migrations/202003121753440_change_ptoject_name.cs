@@ -1,4 +1,4 @@
-namespace IdentityTest2.Migrations
+namespace CarRental.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
