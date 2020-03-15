@@ -67,12 +67,6 @@ namespace CarRental.Controllers
             existingCar.Name = car.Name;
             existingCar.Price = car.Price;
 
-            var brand = carBrandRepository.FindBrandByName(car.Brand.Brand);
-            if (brand == null)
-                existingCar.Brand = new CarBrand { Brand = car.Brand.Brand };
-            else
-                existingCar.Brand.Brand = car.Brand.Brand;
-            
             carRepository.SaveChanges();
             return RedirectToAction("Index");
         }
