@@ -15,5 +15,6 @@ namespace CarRental.Models
         public virtual CarBrand Brand { get; set; }
         public int TypeId { get; set; }
         public virtual CarType Type { get; set; }
+
     }
 }

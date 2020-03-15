@@ -185,9 +185,9 @@
     <Compile Include="Migrations\202003151556059_AddBrandIdCarId.Designer.cs">
       <DependentUpon>202003151556059_AddBrandIdCarId.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003151753430_AddOrder.cs" />
-    <Compile Include="Migrations\202003151753430_AddOrder.Designer.cs">
-      <DependentUpon>202003151753430_AddOrder.cs</DependentUpon>
+    <Compile Include="Migrations\202003151809381_AddOrder.cs" />
+    <Compile Include="Migrations\202003151809381_AddOrder.Designer.cs">
+      <DependentUpon>202003151809381_AddOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -299,8 +299,8 @@
     <EmbeddedResource Include="Migrations\202003151556059_AddBrandIdCarId.resx">
       <DependentUpon>202003151556059_AddBrandIdCarId.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003151753430_AddOrder.resx">
-      <DependentUpon>202003151753430_AddOrder.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003151809381_AddOrder.resx">
+      <DependentUpon>202003151809381_AddOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -17,9 +17,10 @@ namespace CarRental.Models
     {
         public int OrderId { get; set; }
 
-        public int UserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         public int CarId { get; set; }
+        public virtual Car Car { get; set; }
         public string PassportId { get; set; }
 
         public DateTime ReturnDate { get; set; }

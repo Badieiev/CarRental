@@ -13,7 +13,7 @@ namespace IdentityTest2.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202003151753430_AddOrder"; }
+            get { return "202003151809381_AddOrder"; }
         }
         
         string IMigrationMetadata.Source
