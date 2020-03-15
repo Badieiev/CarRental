@@ -79,6 +79,44 @@ namespace CarRental.Controllers
             return View(car);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult AddNewCar()
+        {
+            var brands = carBrandRepository.GetAll().ToList();
+            var carTypes = carTypeRepository.GetAll().ToList();
+            CarViewModel carViewModel = new CarViewModel 
+            {
+                Brands = new SelectList(brands.Select(brand => brand.Brand).ToList()),
+                CarTypes = new SelectList(carTypes.Select(type => type.Type).ToList())
+            };
+
+            return View(carViewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult AddNewCar(CarViewModel carViewModel)
+        {
+            if (!ModelState.IsValid) throw new HttpRequestException();
+
+            var brand = carBrandRepository.FindBrandByName(carViewModel.Brand);
+            var type = carTypeRepository.FindTypeByName(carViewModel.Type);
+
+            Car car = new Car
+            {
+                Name = carViewModel.Name,
+                Type = type,
+                Brand = brand, 
+                Price = carViewModel.Price
+            };
+
+            carRepository.Add(car);
+            carRepository.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
 
 
         public ActionResult About()

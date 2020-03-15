@@ -187,6 +187,7 @@
     <Compile Include="Models\CarBrand.cs" />
     <Compile Include="Models\CarPageViewModel.cs" />
     <Compile Include="Models\CarType.cs" />
+    <Compile Include="Models\CarViewModel.cs" />
     <Compile Include="Models\DatabaseInitializer.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -262,6 +263,7 @@
     <Content Include="Views\Admin\EditUser.cshtml" />
     <Content Include="Views\Home\DeleteCarForm.cshtml" />
     <Content Include="Views\Home\EditCarForm.cshtml" />
+    <Content Include="Views\Home\AddNewCar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
