@@ -106,8 +106,8 @@ namespace CarRental.Controllers
             Car car = new Car
             {
                 Name = carViewModel.Name,
-                Type = type,
-                Brand = brand, 
+                TypeId = type.TypeId,
+                BrandId = brand.BrandID, 
                 Price = carViewModel.Price
             };
 

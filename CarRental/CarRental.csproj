@@ -180,6 +180,10 @@
     <Compile Include="Migrations\202003121753440_change_ptoject_name.Designer.cs">
       <DependentUpon>202003121753440_change_ptoject_name.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003151556059_AddBrandIdCarId.cs" />
+    <Compile Include="Migrations\202003151556059_AddBrandIdCarId.Designer.cs">
+      <DependentUpon>202003151556059_AddBrandIdCarId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -284,6 +288,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003121753440_change_ptoject_name.resx">
       <DependentUpon>202003121753440_change_ptoject_name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003151556059_AddBrandIdCarId.resx">
+      <DependentUpon>202003151556059_AddBrandIdCarId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
