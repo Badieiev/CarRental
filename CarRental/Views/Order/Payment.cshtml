@@ -1,0 +1,41 @@
+﻿@model  CarRental.Models.CarOrderViewModel
+@{
+    ViewBag.Title = "Payment";
+}
+
+<h2>Payment</h2>
+
+<ul>
+    <li>
+        Car: @Model.Name
+    </li>
+    <li>
+        Brand: @Model.Brand
+    </li>
+    <li>
+        Type: @Model.Type
+    </li>
+    <li>
+        Price: @Model.Price
+    </li>
+    <li>
+        Driver: @(Model.Driver ? "Yes" : "No")
+    </li>
+    <li>
+        ReturnDate : @Model.ReturnDate
+    </li>
+    <li>
+        Passport : @Model.PassportId
+    </li>
+</ul>
+
+@using (Html.BeginForm("Payment", "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.HiddenFor(m => m.OrderId)
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Pay" />
+        </div>
+    </div>
+}

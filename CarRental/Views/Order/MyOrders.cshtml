@@ -1,11 +1,43 @@
 ﻿@model IEnumerable<CarRental.Models.Order>
+    @using CarRental.Models
 @{
     ViewBag.Title = "MyOrders";
 }
 
 <h2>My Orders</h2>
 
-@foreach (var order in Model)
-{
-    <p>@order.OrderId</p>
-}
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Passport</th>
+                <th scope="col">Name</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Type</th>
+                <th scope="col">Price</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+            <tr>
+                <td>@order.PassportId</td>
+                <td>@order.Car.Name</td>
+                <td>@order.Car.Brand.Brand</td>
+                <td>@order.Car.Type.Type</td>
+                <td>@order.Car.Price</td>
+                <td>@if (order.Status == Status.NotPaid)
+                {
+                    @Html.ActionLink("Pay", "Payment", new { id = order.OrderId })
+                }
+                else
+                {
+                    @order.Status
+                }
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

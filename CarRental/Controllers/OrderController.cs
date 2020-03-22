@@ -89,9 +89,43 @@ namespace CarRental.Controllers
             return RedirectToAction("MyOrders");
         }
 
+        [Authorize]
+        [HttpGet]
+        public ActionResult Payment (int id)
+        {
+            var order = orderRepository.Get(id);
+            if (order == null)
+            {
+                throw new Exception("order doesnt exist");
+            }
+
+            CarOrderViewModel carOrderViewModel = new CarOrderViewModel
+            {
+                OrderId = order.OrderId,
+                CarId = order.CarId,
+                Name = order.Car.Name,
+                Price = order.Car.Price,
+                Brand = order.Car.Brand.Brand,
+                Type = order.Car.Type.Type,
+                ReturnDate = order.ReturnDate,
+                PassportId = order.PassportId,
+                Driver = order.Driver
+            }; 
+            return View(carOrderViewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
         public ActionResult Payment (CarOrderViewModel carOrderViewModel)
         {
-            return null;
+            var order = orderRepository.Get(carOrderViewModel.OrderId);
+            if (order == null)
+            {
+                throw new Exception("order doesnt exist");
+            }
+            order.Status = Status.Pending;
+            orderRepository.SaveChanges();
+            return RedirectToAction("MyOrders");
         }
     }
 }
