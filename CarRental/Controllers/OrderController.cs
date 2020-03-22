@@ -68,17 +68,25 @@ namespace CarRental.Controllers
             {
                 throw new Exception("user doesnt exist");
             }
-            var order = new Order { 
+
+            var order = new Order 
+            { 
                 CarId = carOrderViewModel.CarId,
                 Driver = carOrderViewModel.Driver,
                 PassportId = carOrderViewModel.PassportId,
                 ReturnDate = carOrderViewModel.ReturnDate,
                 Status = Status.NotPaid,
-                ApplicationUserId = user.Id};
-            TheUserManager.UpdateAsync(user);
+                ApplicationUserId = user.Id
+            };
+
             orderRepository.Add(order);
+
+            user.Orders.Add(order);
+            //await TheUserManager.UpdateAsync(user);
+
             orderRepository.SaveChanges();
-            return null;
+
+            return RedirectToAction("MyOrders");
         }
 
         public ActionResult Payment (CarOrderViewModel carOrderViewModel)

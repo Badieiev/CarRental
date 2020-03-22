@@ -1,4 +1,5 @@
 ﻿using CarRental.Models;
+using IdentityTest2.Migrations;
 
 namespace CarRental.Repositories
 {
