@@ -1,0 +1,11 @@
+﻿@model IEnumerable<CarRental.Models.Order>
+@{
+    ViewBag.Title = "MyOrders";
+}
+
+<h2>My Orders</h2>
+
+@foreach (var order in Model)
+{
+    <p>@order.OrderId</p>
+}

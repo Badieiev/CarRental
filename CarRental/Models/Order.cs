@@ -7,6 +7,7 @@ namespace CarRental.Models
 {
     public enum Status
     {
+        NotPaid,
         Pending,
         Accepted,
         Declined,
@@ -16,6 +17,8 @@ namespace CarRental.Models
     public class Order
     {
         public int OrderId { get; set; }
+
+        public string ApplicationUserId { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
 

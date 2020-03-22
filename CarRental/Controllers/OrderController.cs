@@ -1,8 +1,11 @@
-﻿using CarRental.Models;
+﻿using CarRental.App_Start;
+using CarRental.Models;
 using CarRental.Repositories;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,10 +15,29 @@ namespace CarRental.Controllers
     {
         private CarRepository carRepository = new CarRepository();
         private OrderRepository orderRepository = new OrderRepository();
-        // GET: Order
-        public ActionResult Index()
+        private ApplicationUserManager _userManager;
+       
+        public ApplicationUserManager TheUserManager
         {
-            return View();
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        [Authorize]
+        public async Task<ActionResult> MyOrders()
+        {
+            var user =  await TheUserManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            if (user == null)
+            {
+                throw new Exception("user doesnt exist");
+            }
+            return View(user.Orders);
         }
 
         [Authorize]
@@ -39,13 +61,21 @@ namespace CarRental.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult CreateOrder (CarOrderViewModel carOrderViewModel)
+        public async Task<ActionResult> CreateOrder (CarOrderViewModel carOrderViewModel)
         {
+            var user = await TheUserManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            if (user == null)
+            {
+                throw new Exception("user doesnt exist");
+            }
             var order = new Order { 
                 CarId = carOrderViewModel.CarId,
-                Driver=carOrderViewModel.Driver,
+                Driver = carOrderViewModel.Driver,
                 PassportId = carOrderViewModel.PassportId,
-                ReturnDate= carOrderViewModel.ReturnDate };
+                ReturnDate = carOrderViewModel.ReturnDate,
+                Status = Status.NotPaid,
+                ApplicationUserId = user.Id};
+            TheUserManager.UpdateAsync(user);
             orderRepository.Add(order);
             orderRepository.SaveChanges();
             return null;

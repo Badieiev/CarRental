@@ -173,6 +173,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Migrations\202003221538524_orderUserId.cs" />
+    <Compile Include="Migrations\202003221538524_orderUserId.Designer.cs">
+      <DependentUpon>202003221538524_orderUserId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -277,6 +281,7 @@
     <Content Include="Views\Home\EditCarForm.cshtml" />
     <Content Include="Views\Home\AddNewCar.cshtml" />
     <Content Include="Views\Order\CreateOrder.cshtml" />
+    <Content Include="Views\Order\MyOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -303,6 +308,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003151809381_AddOrder.resx">
       <DependentUpon>202003151809381_AddOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003221538524_orderUserId.resx">
+      <DependentUpon>202003221538524_orderUserId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
