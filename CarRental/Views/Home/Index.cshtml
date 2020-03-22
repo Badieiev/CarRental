@@ -51,7 +51,7 @@
                         <td>@car.Price</td>
                         @if (Request.IsAuthenticated)
                         {
-                            <td>@Html.ActionLink("Order", "CreateOrder", new { id = car.CarId })</td>
+                            <td>@Html.ActionLink("Order", "CreateOrder", new { id = car.CarId , Controller = "Order"})</td>
                         }
                         @if (User.IsInRole("admin"))
                         {

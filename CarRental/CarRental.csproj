@@ -173,6 +173,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,16 +191,17 @@
       <DependentUpon>202003151809381_AddOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\CarBrand.cs" />
-    <Compile Include="Models\CarPageViewModel.cs" />
+    <Compile Include="ViewModels\CarOrderViewModel.cs" />
+    <Compile Include="ViewModels\CarPageViewModel.cs" />
     <Compile Include="Models\CarType.cs" />
-    <Compile Include="Models\CarViewModel.cs" />
+    <Compile Include="ViewModels\CarViewModel.cs" />
     <Compile Include="Models\DatabaseInitializer.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\PageInfo.cs" />
     <Compile Include="Repositories\CarBrandRepository.cs" />
@@ -274,10 +276,10 @@
     <Content Include="Views\Home\DeleteCarForm.cshtml" />
     <Content Include="Views\Home\EditCarForm.cshtml" />
     <Content Include="Views\Home\AddNewCar.cshtml" />
+    <Content Include="Views\Order\CreateOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

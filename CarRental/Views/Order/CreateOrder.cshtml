@@ -1,0 +1,51 @@
+﻿@model  CarRental.Models.CarOrderViewModel
+@{
+    ViewBag.Title = "CreateOrder";
+}
+
+<h2>Create Order</h2>
+
+<ul>
+    <li>
+        Car: @Model.Name
+    </li>
+    <li>
+        Brand: @Model.Brand
+    </li>
+    <li>
+        Price: @Model.Price
+    </li>
+</ul>
+
+@using (Html.BeginForm("CreateOrder", "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.HiddenFor(m => m.CarId)
+
+    @Html.AntiForgeryToken()
+    <h4>Create a new order.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.PassportId, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.PassportId, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Driver, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.CheckBoxFor(m => m.Driver, new { @class="form-check-input" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ReturnDate, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ReturnDate, new { @class = "form-control", type="date" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Create order" />
+        </div>
+    </div>
+}
